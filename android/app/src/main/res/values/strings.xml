@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">lmab</string>
     <string name="facebook_app_id">950593975762425</string>
+    <string name="server_client_id">1058652577809-2hsg21i9j22d060ke8cpvhk2ge6j1mq2.apps.googleusercontent.com</string>
 </resources>
