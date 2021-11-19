@@ -1,40 +1,29 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Button } from 'react-native';
-import { AuthScreen, HomeScreen } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { navigationRef } from './hooks/navigation';
+import { Home, CreateChallenge } from './screens';
+import { AuthProvider } from './common';
+import { client } from './ApolloClient';
+import { ApolloProvider } from '@apollo/client';
 
-import { navigationRef, navigate } from './hooks/navigation';
-
-const Stack = createStackNavigator();
-
-const client = new ApolloClient({
-  uri: 'localhost:4000/graphql',
-  cache: new InMemoryCache()
-});
+const Drawer = createDrawerNavigator();
 
 const App: () => React$Node = () => {
 
   return (
     <ApolloProvider client={client}>
-      <View style={{ flexDirection: 'row', padding: 10, alignItems: 'center', justifyContent: 'space-around' }}>
-        <Button
-          title={'Home'}
-          onPress={() => navigate('HomeScreen')}
-        />
-        <Button
-          title={'Sign in'}
-          onPress={() => navigate('AuthScreen')}
-        />
-      </View>
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='HomeScreen' component={HomeScreen} />
-          <Stack.Screen name='AuthScreen' component={AuthScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer ref={navigationRef}>
+          <Drawer.Navigator initialRouteName={'Home'}>
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Create a new challenge" component={CreateChallenge} />
+            <Drawer.Screen name="People" component={Home} />
+            <Drawer.Screen name="Settings" component={Home} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
     </ApolloProvider>
   );
 };
