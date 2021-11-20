@@ -5,3 +5,4 @@ export * from './CreateChallenge';
 export * from './ViewChallenge';
 export * from './Challenges';
 export * from './ChallengeRoom';
+export * from './UserSettings';
