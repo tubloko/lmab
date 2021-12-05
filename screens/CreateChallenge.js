@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Layout } from '../components';
 
 const CreateChallenge = () => {
   return (
-    <View>
-      <Text>
-        Create challenge screen
-      </Text>
-    </View>
+    <Layout header={'CreateChallenge'}>
+      <View>
+        <Text>Create challenge</Text>
+      </View>
+    </Layout>
   );
 };
 
