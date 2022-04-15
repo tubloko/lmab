@@ -17,6 +17,8 @@ const Auth = ({ navigation: { navigate } }) => {
         console.log('userInfo', userInfo);
         registerFieldsVar({
           isDisabled: true,
+          accessToken: userInfo.idToken,
+          googleId: userInfo.user.id,
           name: userInfo.user.name,
           email: userInfo.user.email,
         });
