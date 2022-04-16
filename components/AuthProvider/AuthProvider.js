@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Auth, Login, Register } from '../screens';
+import React, { useEffect } from 'react';
+import { Auth, Login, Register } from '../../screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getToken } from '../../common/utils';
+import { useReactiveVar } from '@apollo/client';
+import { authToken } from '../../common/reactiveVariables';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,18 +15,16 @@ export const authScreens = [
 ];
 
 const AuthProvider = ({ children }) => {
-  //todo change to makeVar from graphql
-  const [token, setToken] = useState();
+  const token = useReactiveVar(authToken);
 
   useEffect(() => {
     (async function () {
-      setToken(await AsyncStorage.getItem('token'));
+      authToken(await getToken());
     })();
   }, []);
 
   return (
     <>
-      {/* eslint-disable-next-line no-constant-condition */}
       {token ? children : (
         <NavigationContainer>
           <Stack.Navigator initialRouteName={'Auth'}>

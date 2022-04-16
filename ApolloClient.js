@@ -5,7 +5,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { env } from './config/config';
 import { getToken } from './common/utils';
 
-const createApolloClient = async () => {
+const createApolloClient = () => {
   const httpLink = createHttpLink({
     uri: env.api,
     credentials: 'include',
@@ -37,4 +37,4 @@ const createApolloClient = async () => {
   });
 };
 
-export default createApolloClient;
+export default createApolloClient();

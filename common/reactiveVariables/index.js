@@ -8,3 +8,5 @@ export const registerFieldsVar = makeVar({
   email: '',
   password: '',
 });
+
+export const authToken = makeVar('');

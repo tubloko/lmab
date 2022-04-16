@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { screens } from './screens';
+import { signOut } from '../../common/utils';
 
 const CustomDrawerContent = ({ navigation, ...rest }) => {
 
@@ -20,6 +21,10 @@ const CustomDrawerContent = ({ navigation, ...rest }) => {
           />;
         })}
       </View>
+      <DrawerItem
+        label={'Logout'}
+        onPress={signOut}
+      />
     </DrawerContentScrollView>
   );
 };
