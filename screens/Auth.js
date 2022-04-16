@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { StyleSheet, Button } from 'react-native';
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import { registerFieldsVar } from '../common/reactiveVariables';
+import { Box } from 'native-base';
+import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 
 GoogleSignin.configure({
   androidClientId: '1058652577809-2hsg21i9j22d060ke8cpvhk2ge6j1mq2.apps.googleusercontent.com',
@@ -35,24 +37,29 @@ const Auth = ({ navigation: { navigate } }) => {
   };
 
   return (
-    <View>
-      <View style={styles.buttonWrapper}>
+    <AuthLayout>
+      <Box style={styles.buttonView}>
         <Button title={'Login'} onPress={() => handleOnPress('Login')} />
-      </View>
-      <View style={styles.buttonWrapper}>
+      </Box>
+      <Box mt={5} style={styles.buttonView}>
         <Button title={'Register'} onPress={() => handleOnPress('Register')} />
-      </View>
-      <View style={styles.buttonWrapper}>
-        <Button title={'Sign up with Google'} onPress={handleGoogleSignin} />
-      </View>
-    </View>
+      </Box>
+      <Box mt={5} justifyContent="center">
+        <GoogleSigninButton
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={handleGoogleSignin}
+        />
+      </Box>
+    </AuthLayout>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonWrapper: {
+  buttonView: {
     marginVertical: 5,
-  }
+    width: 300,
+  },
 });
 
 export { Auth };

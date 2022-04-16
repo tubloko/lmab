@@ -3,14 +3,17 @@ import React from 'react';
 import client from './ApolloClient';
 import { ApolloProvider } from '@apollo/client';
 import { Navigation, AuthProvider } from './components';
+import { NativeBaseProvider } from 'native-base';
 
 const App: () => React$Node = () => {
 
   return (
     <ApolloProvider client={client}>
-      <AuthProvider>
-        <Navigation />
-      </AuthProvider>
+      <NativeBaseProvider>
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
+      </NativeBaseProvider>
     </ApolloProvider>
   );
 };
