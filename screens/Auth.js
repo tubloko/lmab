@@ -43,7 +43,7 @@ const Auth = ({ navigation: { navigate } }) => {
         <Button title={'Register'} onPress={() => handleOnPress('Register')} />
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title={'Sign in with Google'} onPress={handleGoogleSignin} />
+        <Button title={'Sign up with Google'} onPress={handleGoogleSignin} />
       </View>
     </View>
   );

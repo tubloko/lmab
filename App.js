@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { AuthProvider } from './common';
-import { client } from './ApolloClient';
+import client from './ApolloClient';
 import { ApolloProvider } from '@apollo/client';
 import { Navigation } from './components';
 
