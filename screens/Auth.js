@@ -16,7 +16,6 @@ const Auth = ({ navigation: { navigate } }) => {
       const hasPlayService = await GoogleSignin.hasPlayServices();
       if (hasPlayService) {
         const userInfo = await GoogleSignin.signIn();
-        console.log('userInfo', userInfo);
         registerFieldsVar({
           isDisabled: true,
           accessToken: userInfo.idToken,
@@ -39,10 +38,10 @@ const Auth = ({ navigation: { navigate } }) => {
   return (
     <AuthLayout>
       <Box style={styles.buttonView}>
-        <Button title={'Login'} onPress={() => handleOnPress('Login')} />
+        <Button title={'Sign in'} onPress={() => handleOnPress('Login')} />
       </Box>
       <Box mt={5} style={styles.buttonView}>
-        <Button title={'Register'} onPress={() => handleOnPress('Register')} />
+        <Button title={'Sign up'} onPress={() => handleOnPress('Register')} />
       </Box>
       <Box mt={5} justifyContent="center">
         <GoogleSigninButton

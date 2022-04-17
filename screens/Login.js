@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
-import { Stack, Input, Box, Pressable } from 'native-base';
+import { Stack, Input, Box, Pressable, Button } from 'native-base';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAt, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../common/mutations/authMutations';
+import { signIn } from '../common/utils';
+//todo handle errors
 const Login = () => {
+  const [login, data] = useMutation(LOGIN, {
+    onCompleted: ({ login }) => {
+      signIn(login.user.token);
+    }
+  });
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => login({
+    variables: {
+      email,
+      password
+    }
+  });
 
   return (
     <AuthLayout>
       <Stack space={4} w="100%" alignItems="center">
         <Input
+          onChangeText={setEmail}
+          value={email}
           color={'yellow.50'}
           w={300}
           size="2xl"
@@ -20,6 +39,8 @@ const Login = () => {
           placeholder="Email" 
         />
         <Input
+          onChangeText={setPassword}
+          value={password}
           color={'yellow.50'}
           w={300}
           size="2xl"
@@ -33,7 +54,18 @@ const Login = () => {
           )}
           placeholder="Password" 
         />
-      </Stack>;
+        <Button
+          w={200}
+          size="lg"
+          variant="outline"
+          color={'yellow.50'}
+          isLoading={data.loading}
+          isLoadingText="Submitting"
+          onPress={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Stack>
     </AuthLayout>
   );
 };
